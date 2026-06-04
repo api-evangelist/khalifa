@@ -1,0 +1,14 @@
+{
+  "repo": "khalifa",
+  "feeds": [
+    {
+      "source": "https://www.ku.ac.ae",
+      "feed_url": "https://www.ku.ac.ae/category/news",
+      "title": "Khalifa University News",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-03T00:00:00Z"
+}

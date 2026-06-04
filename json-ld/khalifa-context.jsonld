@@ -1,0 +1,53 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "ku": "https://www.ku.ac.ae/#vocab/",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "logo": "schema:logo",
+    "sameAs": "schema:sameAs",
+    "address": "schema:address",
+    "location": "schema:location",
+    "department": {
+      "@id": "schema:department",
+      "@type": "@id"
+    },
+    "CollegeOrUniversity": "schema:CollegeOrUniversity",
+    "Organization": "schema:Organization",
+    "SoftwareSourceCode": "schema:SoftwareSourceCode",
+    "codeRepository": "schema:codeRepository",
+    "programmingLanguage": "schema:programmingLanguage",
+    "license": {
+      "@id": "schema:license",
+      "@type": "@id"
+    },
+    "api": "ku:api",
+    "apiObject": "ku:apiObject"
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "Khalifa University",
+  "description": "Khalifa University of Science and Technology is a research-intensive university in Abu Dhabi, United Arab Emirates.",
+  "url": "https://www.ku.ac.ae",
+  "sameAs": [
+    "https://github.com/kucars",
+    "https://www.linkedin.com/school/khalifauniversity/",
+    "https://library.ku.ac.ae"
+  ],
+  "location": {
+    "@type": "schema:Place",
+    "name": "Abu Dhabi, United Arab Emirates"
+  },
+  "department": {
+    "@type": "Organization",
+    "name": "Center for Autonomous Robotic Systems (KUCARS)",
+    "url": "https://github.com/kucars",
+    "api": {
+      "@type": "SoftwareSourceCode",
+      "name": "KUCARS Open-Source Robotics Research",
+      "codeRepository": "https://github.com/kucars",
+      "programmingLanguage": ["C++", "MATLAB", "Python", "CMake"]
+    }
+  }
+}
