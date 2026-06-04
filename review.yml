@@ -1,0 +1,33 @@
+---
+name: Khalifa University
+description: Khalifa University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/khalifa/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 1
+    summary: >-
+      No central public, documented API program or developer portal was found
+      for Khalifa University. Student and administrative systems (KU Connect,
+      Banner registration, e-Learn, library discovery) sit behind institutional
+      authentication. The only confirmed public developer footprint is the
+      KUCARS GitHub organization, which hosts open-source robotics research code
+      rather than a managed API. No endpoints were fabricated; only URLs probed
+      live are listed below.
+    endpoints:
+      - url: https://www.ku.ac.ae
+        status: 200
+        note: Official university website; live, no documented public API.
+      - url: https://library.ku.ac.ae
+        status: 200
+        note: Library / LibGuides; live, discovery gated, no public OAI-PMH/Primo API confirmed.
+      - url: https://github.com/kucars
+        status: 200
+        note: KUCARS GitHub org; ~70 public robotics research repos, not a managed API.
+      - url: https://www.linkedin.com/school/khalifauniversity/
+        status: 999
+        note: Official LinkedIn school page; 999 is LinkedIn anti-bot, page exists publicly.
+      - url: https://admissions.ku.ac.ae
+        status: 0
+        note: Online admissions portal; did not resolve from this environment (gated).

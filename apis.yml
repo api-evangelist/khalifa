@@ -1,0 +1,68 @@
+---
+aid: khalifa
+name: Khalifa University
+description: >-
+  Khalifa University of Science and Technology is a research-intensive
+  university in Abu Dhabi, United Arab Emirates, ranked #202 in the QS World
+  University Rankings 2025. It operates colleges of Engineering and Physical
+  Sciences, Computing and Mathematical Sciences, and Medicine and Health
+  Sciences, along with multiple research centers. No central public,
+  documented developer or API program was found; student and administrative
+  systems (KU Connect portal, Banner registration, e-Learn, library
+  discovery) are gated behind institutional authentication. The only confirmed
+  public code footprint is the GitHub organization of its Center for Autonomous
+  Robotic Systems (KUCARS), which publishes open-source robotics research
+  repositories rather than a managed, documented API.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/khalifa/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - Robotics
+  - United Arab Emirates
+  - Abu Dhabi
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: khalifa:kucars
+    name: KUCARS Open-Source Robotics Research (GitHub)
+    description: >-
+      Public open-source repositories from the Khalifa University Center for
+      Autonomous Robotic Systems (KUCARS), covering autonomous robotics topics
+      such as coverage path planning, soft manipulator dynamics, collision
+      detection, and haptic teleoperation. This is research source code (C++,
+      MATLAB, Python, CMake) rather than a documented, managed API product; no
+      formal API reference or signup is published.
+    humanURL: https://github.com/kucars
+    tags: [ Robotics, Research, Source Code, Open Source ]
+    properties:
+      - type: Documentation
+        url: https://github.com/kucars
+      - type: GitHub
+        url: https://github.com/kucars
+common:
+  - type: Website
+    url: https://www.ku.ac.ae
+  - type: Library
+    url: https://library.ku.ac.ae
+  - type: GitHub
+    url: https://github.com/kucars
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/khalifauniversity/
+  - type: Plans
+    url: plans/khalifa-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/khalifa-rate-limits.yml
+  - type: FinOps
+    url: finops/khalifa-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
