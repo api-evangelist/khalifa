@@ -52,7 +52,16 @@ apis:
       MATLAB, Python, CMake) rather than a documented, managed API product; no
       formal API reference or signup is published.
     humanURL: https://github.com/kucars
-    tags: [ Robotics, Research, Source Code, Open Source ]
+    tags:
+    - Robotics
+    - Research
+    - Source Code
+    - Open-Source
+    tags_raw:
+    - Robotics
+    - Research
+    - Source Code
+    - Open Source
     properties:
       - type: Documentation
         url: https://github.com/kucars
