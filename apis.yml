@@ -1,24 +1,31 @@
 ---
 aid: khalifa
 name: Khalifa University
+x-type: university
+x-category: Public Research University
 description: >-
-  Khalifa University of Science and Technology is a research-intensive
-  university in Abu Dhabi, United Arab Emirates, ranked #202 in the QS World
-  University Rankings 2025. It operates colleges of Engineering and Physical
-  Sciences, Computing and Mathematical Sciences, and Medicine and Health
-  Sciences, along with multiple research centers. No central public,
-  documented developer or API program was found; student and administrative
-  systems (KU Connect portal, Banner registration, e-Learn, library
-  discovery) are gated behind institutional authentication. The only confirmed
-  public code footprint is the GitHub organization of its Center for Autonomous
-  Robotic Systems (KUCARS), which publishes open-source robotics research
-  repositories rather than a managed, documented API.
+  Khalifa University of Science and Technology is a research-intensive public university in Abu
+  Dhabi, United Arab Emirates (ROR 05hffr360), formed from the 2017 merger of KUSTAR, the Masdar
+  Institute and the Petroleum Institute. Its programmable footprint is small, real, and almost
+  entirely indirect. Two surfaces are genuinely institution-operated: an OAI-PMH 2.0 endpoint for
+  the Khazna research portal at khazna.ku.ac.ae/ws/oai, live and anonymous with an institution
+  admin contact, and the university's own Microsoft Entra ID tenant for the ku.ac.ae namespace,
+  which issues OpenID Connect and SAML 2.0 for institution systems. A third, partial surface is the
+  WordPress REST API on www.ku.ac.ae, whose discovery root and a handful of routes answer publicly
+  while the core collections are closed with HTTP 401. Everything else a search turns up is a
+  vendor contract running under the university's name: Khazna itself is an Elsevier Pure tenant
+  (khazna.ku.ac.ae CNAMEs to khalifauniversity.elsevierpure.com) and Elsevier's own Pure API spec
+  is served from that host; the LMS is a Blackboard Learn tenant behind elearn.ku.ac.ae; discovery
+  is Ex Libris Primo VE; the library web presence, calendar and ask-a-librarian service are
+  Springshare; off-campus access is OCLC EZproxy. Those relationships are recorded here as
+  tenancies. None of their contracts are catalogued as Khalifa's. There is no central developer
+  portal, no published API program, no open-data portal, and no institution-operated API reference.
 type: Index
 deliveryModel:
   model: saas
   open_source: false
   commercial: true
-  callable_host: false
+  callable_host: true
   label: Hosted service · you call their endpoint
   confidence: medium
   source:
@@ -27,41 +34,269 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: free
-  onboarding: unknown
+  onboarding: none
   trial: false
-  try_now: false
-  public: false
+  try_now: true
+  public: true
   label: Free
   confidence: medium
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  generated: '2026-09-01'
+  method: probed
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/khalifa.png
 url: https://raw.githubusercontent.com/api-evangelist/khalifa/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
   - University
+  - Higher Education
+  - Education
   - Research
+  - Research Data
+  - Research Repository
+  - Identity Federation
+  - OAI-PMH
   - Robotics
   - United Arab Emirates
   - Abu Dhabi
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-09-01'
 specificationVersion: '0.23'
 apis:
+  - aid: khalifa:khazna-oai-pmh
+    name: Khazna OAI-PMH Repository
+    x-operator: institution
+    description: >-
+      OAI-PMH 2.0 metadata harvesting endpoint for Khazna, Khalifa University's research portal,
+      at https://khazna.ku.ac.ae/ws/oai. Open and anonymous. Identify (probed 2026-09-01, HTTP 200)
+      reports repositoryName "Pure OAI Repository", baseURL https://khazna.ku.ac.ae/ws/oai,
+      adminEmail khazna@ku.ac.ae, earliestDatestamp 2023-01-11T09:41:56Z, granularity
+      YYYY-MM-DDThh:mm:ssZ, and declares the OpenAIRE CERIF 1.2 profile. ListMetadataFormats
+      returns 7 formats including oai_dc, MODS 3.8 and xmetadiss; ListSets returns a full set
+      hierarchy. The base URL is on the institution's own registrable domain and the admin
+      contact is an institution address, so the harvesting surface is the institution's — even
+      though the repository software underneath it is an Elsevier Pure tenant. Elsevier's own
+      "Pure API" contract is served from the same host at /ws/api/openapi.yaml and is
+      deliberately NOT catalogued here: it is Elsevier's contract, not Khalifa's.
+    humanURL: https://khazna.ku.ac.ae
+    baseURL: https://khazna.ku.ac.ae/ws/oai
+    tags:
+    - Research Data
+    - Research Repository
+    - OAI-PMH
+    - Metadata Harvesting
+    - Open Access
+    properties:
+      - type: OpenAPI
+        url: openapi/khalifa-khazna-oai-pmh-openapi.yml
+      - type: Example
+        url: examples/khalifa-oai-pmh-identify-response.xml
+      - type: Example
+        url: examples/khalifa-oai-pmh-listmetadataformats-response.xml
+      - type: Authentication
+        url: authentication/khalifa-authentication.yml
+      - type: Conformance
+        url: conformance/khalifa-education-standards-conformance.yml
+      - type: Documentation
+        url: https://khazna.ku.ac.ae
+  - aid: khalifa:entra-identity-federation
+    name: Khalifa University Identity Federation (Microsoft Entra ID)
+    x-operator: federation
+    description: >-
+      Khalifa University operates its own Microsoft Entra ID tenant for the ku.ac.ae namespace —
+      tenant id 08fe1c0a-19f5-4f24-a662-fdd5dd460025, getuserrealm.srf reporting
+      NameSpaceType=Managed, DomainName=ku.ac.ae, FederationBrandName=ku.ac.ae. The OpenID Connect
+      discovery document and the SAML 2.0 federation metadata are both public and machine-readable
+      (HTTP 200, probed 2026-09-01). The tenant is demonstrably the production IdP for institution
+      systems: elearn.ku.ac.ae redirects to its /saml2 endpoint with a SAMLRequest, and
+      portal.ku.ac.ae and kubee.ku.ac.ae redirect to its WS-Federation endpoint with wtrealm
+      http://adfs.ku.ac.ae/adfs/services/trust. No Shibboleth IdP and no eduGAIN entity were
+      found; Khalifa federates through Entra ID instead. The identity provider is the
+      institution's; the hosting platform is Microsoft's.
+    humanURL: https://login.microsoftonline.com/ku.ac.ae/v2.0/.well-known/openid-configuration
+    tags:
+    - Identity Federation
+    - SAML
+    - OpenID Connect
+    - Single Sign-On
+    - Authentication
+    properties:
+      - type: Example
+        url: examples/khalifa-entra-openid-configuration.json
+      - type: Authentication
+        url: authentication/khalifa-authentication.yml
+      - type: Conformance
+        url: conformance/khalifa-education-standards-conformance.yml
+      - type: Documentation
+        url: https://login.microsoftonline.com/ku.ac.ae/federationmetadata/2007-06/federationmetadata.xml
+  - aid: khalifa:ku-web-rest
+    name: Khalifa University Website REST API (WordPress)
+    x-operator: institution
+    description: >-
+      The university's own web host at www.ku.ac.ae runs WordPress and answers its REST discovery
+      root anonymously — HTTP 200, name "Khalifa University", 17 namespaces, 202 routes (probed
+      2026-09-01). Access is partial by design: the core wp/v2 collection routes return HTTP 401
+      with code "itsec_rest_api_access_restricted", while wp/v2/search and the
+      tribe/events/v1 event and venue routes return real data with no credential. The deployment
+      is institution-operated; the contract is WordPress core's and its plugins', so no generic
+      WordPress specification is catalogued under Khalifa University. Recorded as a real, live,
+      partially readable institution surface — not as Khalifa engineering.
+    humanURL: https://www.ku.ac.ae/wp-json/
+    baseURL: https://www.ku.ac.ae/wp-json
+    tags:
+    - Content
+    - Website
+    - WordPress
+    - Events
+    - Search
+    properties:
+      - type: Authentication
+        url: authentication/khalifa-authentication.yml
+      - type: Documentation
+        url: https://www.ku.ac.ae/wp-json/
+  - aid: khalifa:khazna-pure
+    name: Khazna Research Portal (Elsevier Pure tenant)
+    x-operator: tenant
+    description: >-
+      Khalifa University's CRIS and research portal, Khazna, is an Elsevier Pure tenancy:
+      khazna.ku.ac.ae is a CNAME to khalifauniversity.elsevierpure.com, which is a CNAME to
+      eu.prod.elsevierpure.com. The research outputs, the profiles and the DOIs are Khalifa's; the
+      software and the contract are Elsevier's. The Pure Web Service spec served at
+      https://khazna.ku.ac.ae/ws/api/openapi.yaml — info.title "Pure API", version 5.36.2-1,
+      info.contact.email pure-support@elsevier.com, servers "- url: /ws/api" (relative, hostless) —
+      is DELIBERATELY NOT SAVED under this institution. It is the exact class of misattribution
+      this catalog's university pipeline exists to prevent. The relationship is the fact worth
+      recording; the contract belongs with Elsevier.
+    humanURL: https://khazna.ku.ac.ae
+    tags:
+    - Research Repository
+    - CRIS
+    - Research Data
+    - Elsevier Pure
+    - Tenant
+    properties:
+      - type: Documentation
+        url: https://khazna.ku.ac.ae/ws/api/documentation/index.html
+  - aid: khalifa:blackboard-learn
+    name: Blackboard Learn (khalifauni tenant)
+    x-operator: tenant
+    description: >-
+      Khalifa University's learning management system is an Anthology Blackboard Learn SaaS
+      tenancy named "khalifauni". elearn.ku.ac.ae is a CNAME to khalifauni.blackboard.com, which
+      resolves into learn.5e7d505f72bc5.euc1.prod-01.core.blackboard.com. The tenant is confirmed
+      live: https://khalifauni.blackboard.com/learn/api/public/v1/system/version returned HTTP 200
+      with {"learn":{"major":4000,"minor":21,"patch":0,"build":"rel.28+435d029"}} on 2026-09-01,
+      and the tenant root redirects into Khalifa's own Entra ID SAML2 endpoint. The Blackboard
+      REST API and its LTI certification are Anthology's, not Khalifa's, and are not catalogued
+      here.
+    humanURL: https://elearn.ku.ac.ae
+    tags:
+    - Learning Management
+    - LMS
+    - Blackboard
+    - Tenant
+    properties:
+      - type: Documentation
+        url: https://khalifauni.blackboard.com/learn/api/public/v1/system/version
+  - aid: khalifa:primo-discovery
+    name: Library Discovery (Ex Libris Primo VE tenant)
+    x-operator: tenant
+    description: >-
+      Library discovery runs on an Ex Libris Primo VE tenancy at
+      khalifa.primo.exlibrisgroup.com with view id 971KUOSTAR_INST:KU — the institution code still
+      carrying the legacy KUSTAR name. Probed 2026-09-01, HTTP 200 with the correct vid; the host
+      resolves to eu01.primo.exlibrisgroup.com. Ex Libris operates the platform and owns the
+      contract; the catalog and the collection are Khalifa's.
+    humanURL: https://khalifa.primo.exlibrisgroup.com/discovery/search?vid=971KUOSTAR_INST:KU
+    tags:
+    - Library
+    - Discovery
+    - Ex Libris
+    - Tenant
+    properties:
+      - type: Documentation
+        url: https://khalifa.primo.exlibrisgroup.com/discovery/search?vid=971KUOSTAR_INST:KU
+  - aid: khalifa:springshare
+    name: Library Web, Calendar and Reference (Springshare tenant)
+    x-operator: tenant
+    description: >-
+      Three Springshare tenancies serve the Khalifa University library. library.ku.ac.ae is a
+      CNAME to region-us.libguides.com (LibGuides; page title "Library Home - LibGuides at Khalifa
+      University of Science and Technology"). libanswers.ku.ac.ae is a CNAME to
+      region-us.libanswers.com (LibAnswers). Room and event booking runs on the account
+      kustar.libcal.com, with LibApps admin at kustar.libapps.com — again the legacy KUSTAR
+      account name. All three returned HTTP 200 on 2026-09-01. Springshare's LibGuides/LibCal/
+      LibAnswers APIs are keyed per site by Springshare and are the vendor's contract; the
+      tenancies are Khalifa's.
+    humanURL: https://library.ku.ac.ae/lib
+    tags:
+    - Library
+    - Springshare
+    - LibGuides
+    - Room Booking
+    - Tenant
+    properties:
+      - type: Documentation
+        url: https://library.ku.ac.ae/lib
+      - type: Website
+        url: https://libanswers.ku.ac.ae/
+      - type: Website
+        url: https://kustar.libcal.com/
+  - aid: khalifa:ezproxy
+    name: Off-Campus Access (OCLC EZproxy tenant)
+    x-operator: tenant
+    description: >-
+      Off-campus access to licensed library resources runs on an OCLC EZproxy tenancy under the
+      named account khalifa.idm.oclc.org (HTTP 200 on /login, probed 2026-09-01). Proxied database
+      links appear throughout the library site, for example
+      search.ebscohost.com.khalifa.idm.oclc.org. OCLC operates the platform; the named account and
+      the entitlement configuration are Khalifa's.
+    humanURL: https://khalifa.idm.oclc.org/login
+    tags:
+    - Library
+    - Proxy
+    - OCLC
+    - Access Management
+    - Tenant
+    properties:
+      - type: Documentation
+        url: https://khalifa.idm.oclc.org/login
+  - aid: khalifa:ror
+    name: ROR Registration
+    x-operator: registry
+    description: >-
+      Khalifa University of Science and Technology is registered in the Research Organization
+      Registry as https://ror.org/05hffr360, with the alternate names KUSTAR and Khalifa
+      University and country United Arab Emirates. This is a membership in an identifier registry
+      the institution is registered in, not a contract it operates: the registry's own API belongs
+      to ROR. Recorded because it is a fact about Khalifa, and it is the identifier every
+      downstream research system resolves them by. No DataCite client or provider
+      (api.datacite.org, meta.total 0) and no Crossref membership (api.crossref.org/members) were
+      found for this institution on 2026-09-01.
+    humanURL: https://ror.org/05hffr360
+    tags:
+    - Registry
+    - Identifiers
+    - ROR
+    - Research
+    properties:
+      - type: Documentation
+        url: https://ror.org/05hffr360
+      - type: APIReference
+        url: https://api.ror.org/v2/organizations/05hffr360
   - aid: khalifa:kucars
     name: KUCARS Open-Source Robotics Research (GitHub)
+    x-operator: institution
     description: >-
-      Public open-source repositories from the Khalifa University Center for
-      Autonomous Robotic Systems (KUCARS), covering autonomous robotics topics
-      such as coverage path planning, soft manipulator dynamics, collision
-      detection, and haptic teleoperation. This is research source code (C++,
-      MATLAB, Python, CMake) rather than a documented, managed API product; no
-      formal API reference or signup is published.
+      Public open-source repositories from the Khalifa University Center for Autonomous Robotic
+      Systems (KUCARS) — 71 public repos covering coverage path planning, soft manipulator
+      dynamics, collision detection and haptic teleoperation. Research source code (C++, MATLAB,
+      Python, CMake), not a documented, managed API product; no API reference and no signup. A
+      code host is not a vendor, and this organization identifies itself as Khalifa University's
+      centre (org name "Khalifa University Center for Autonomous Robotic Systems", blog
+      www.kucars.ae), so it is recorded as institution-operated. Related lab organizations
+      publishing under Khalifa research groups include KUQCI, CVML-KU, KU-AIR-Lab and VSAP-lab.
     humanURL: https://github.com/kucars
     tags:
     - Robotics
@@ -79,16 +314,36 @@ apis:
       - type: GitHub
         url: https://github.com/kucars
 common:
-  - type: DomainSecurity
-    url: security/khalifa-domain-security.yml
   - type: Website
     url: https://www.ku.ac.ae
+  - type: Blog
+    url: https://www.ku.ac.ae/news
+  - type: BlogRSS
+    url: https://www.ku.ac.ae/feed/
+  - type: Support
+    url: https://www.ku.ac.ae/contact-us
+  - type: PrivacyPolicy
+    url: https://www.ku.ac.ae/privacy-policy
+  - type: TermsOfService
+    url: https://www.ku.ac.ae/disclaimer
+  - type: ResearchRepository
+    url: https://khazna.ku.ac.ae
+  - type: LibraryCatalog
+    url: https://khalifa.primo.exlibrisgroup.com/discovery/search?vid=971KUOSTAR_INST:KU
   - type: Library
-    url: https://library.ku.ac.ae
-  - type: GitHub
+    url: https://library.ku.ac.ae/lib
+  - type: IdentityFederation
+    url: https://login.microsoftonline.com/ku.ac.ae/v2.0/.well-known/openid-configuration
+  - type: GitHubOrganization
     url: https://github.com/kucars
   - type: LinkedIn
     url: https://www.linkedin.com/school/khalifauniversity/
+  - type: Authentication
+    url: authentication/khalifa-authentication.yml
+  - type: Conformance
+    url: conformance/khalifa-education-standards-conformance.yml
+  - type: DomainSecurity
+    url: security/khalifa-domain-security.yml
   - type: Plans
     url: plans/khalifa-plans-pricing.yml
   - type: RateLimits
@@ -97,6 +352,72 @@ common:
     url: finops/khalifa-finops.yml
   - type: Review
     url: review.yml
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    Khalifa University publishes no developer portal and no API program, but it is not empty. Two
+    institution-operated machine-readable surfaces were found and verified live on 2026-09-01: an
+    open OAI-PMH 2.0 endpoint at khazna.ku.ac.ae/ws/oai (Identify, ListMetadataFormats and ListSets
+    all HTTP 200, adminEmail khazna@ku.ac.ae) and the university's own Microsoft Entra ID tenant
+    for ku.ac.ae (OIDC discovery and SAML federation metadata both HTTP 200, tenant
+    08fe1c0a-19f5-4f24-a662-fdd5dd460025, in production for elearn/portal/kubee SSO). A third,
+    partial surface is the WordPress REST API on www.ku.ac.ae, whose discovery root and a handful
+    of routes are public while core collections return 401. Six vendor tenancies were identified
+    and recorded as relationships rather than contracts: Elsevier Pure (Khazna), Blackboard Learn,
+    Ex Libris Primo VE, Springshare LibGuides/LibCal/LibAnswers, and OCLC EZproxy. Elsevier's
+    "Pure API" spec, served from Khalifa's own host at khazna.ku.ac.ae/ws/api/openapi.yaml with a
+    relative servers block and pure-support@elsevier.com as contact, was found and deliberately
+    NOT catalogued. Two apparent Figshare tenancies were rejected as false positives: both
+    khalifa.figshare.com and ku.figshare.com return HTTP 202, and so does a control request to a
+    nonsense subdomain — Figshare wildcards every subdomain. ku.elsevierpure.com was also rejected:
+    it redirects to researchprofiles.ku.dk, which is the University of Copenhagen. No DataCite
+    client, no Crossref membership, no Shibboleth IdP, no eduGAIN entity, no open-data portal
+    (data.ku.ac.ae, opendata.ku.ac.ae do not resolve), and no course-catalog or registrar API
+    (api., developer., sis., registration., catalog.ku.ac.ae all fail to resolve) were found. The
+    HPC portal at hpc.ku.ac.ae resolves but returned HTTP 503 "Server Unavailable", so no pointer
+    is emitted for it.
+  evidence:
+    - url: https://khazna.ku.ac.ae/ws/oai?verb=Identify
+      status: 200
+    - url: https://khazna.ku.ac.ae/ws/oai?verb=ListMetadataFormats
+      status: 200
+    - url: https://khazna.ku.ac.ae/ws/api/openapi.yaml
+      status: 200
+    - url: https://login.microsoftonline.com/ku.ac.ae/v2.0/.well-known/openid-configuration
+      status: 200
+    - url: https://login.microsoftonline.com/ku.ac.ae/federationmetadata/2007-06/federationmetadata.xml
+      status: 200
+    - url: https://www.ku.ac.ae/wp-json/
+      status: 200
+    - url: https://www.ku.ac.ae/wp-json/wp/v2/search?search=research&per_page=1
+      status: 200
+    - url: https://www.ku.ac.ae/wp-json/wp/v2/posts?per_page=1
+      status: 401
+    - url: https://khalifauni.blackboard.com/learn/api/public/v1/system/version
+      status: 200
+    - url: https://khalifa.primo.exlibrisgroup.com/discovery/search?vid=971KUOSTAR_INST:KU
+      status: 200
+    - url: https://library.ku.ac.ae/lib
+      status: 200
+    - url: https://libanswers.ku.ac.ae/
+      status: 200
+    - url: https://kustar.libcal.com/
+      status: 200
+    - url: https://khalifa.idm.oclc.org/login
+      status: 200
+    - url: https://api.ror.org/v2/organizations/05hffr360
+      status: 200
+    - url: https://api.datacite.org/clients?query=ku.ac.ae
+      status: 200
+    - url: https://api.crossref.org/members?query=khalifa
+      status: 200
+    - url: https://hpc.ku.ac.ae
+      status: 503
+    - url: https://www.ku.ac.ae/llms.txt
+      status: 404
+    - url: https://data.ku.ac.ae
+      status: 0
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
