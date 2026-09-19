@@ -81,6 +81,12 @@ apis:
   - Identity Federation
   - SAML
   - OpenID Connect
+  - SSO
+  - Authentication
+  tags_raw:
+  - Identity Federation
+  - SAML
+  - OpenID Connect
   - Single Sign-On
   - Authentication
   properties:
@@ -108,7 +114,7 @@ apis:
   baseURL: https://www.ku.ac.ae/wp-json
   tags:
   - Content
-  - Website
+  - Websites
   - WordPress
   - Event
   - Search
@@ -138,6 +144,12 @@ apis:
   humanURL: https://khazna.ku.ac.ae
   tags:
   - Research Repository
+  - CRI
+  - Research Data
+  - Elsevier Pure
+  - Tenants
+  tags_raw:
+  - Research Repository
   - CRIS
   - Research Data
   - Elsevier Pure
@@ -160,6 +172,11 @@ apis:
   - Learning Management
   - LMS
   - Blackboard
+  - Tenants
+  tags_raw:
+  - Learning Management
+  - LMS
+  - Blackboard
   - Tenant
   properties:
   - type: Documentation
@@ -174,6 +191,11 @@ apis:
     the platform and owns the contract; the catalog and the collection are Khalifa's.
   humanURL: https://khalifa.primo.exlibrisgroup.com/discovery/search?vid=971KUOSTAR_INST:KU
   tags:
+  - Library
+  - Discovery
+  - Ex Libris
+  - Tenants
+  tags_raw:
   - Library
   - Discovery
   - Ex Libris
@@ -197,6 +219,12 @@ apis:
   - Springshare
   - LibGuides
   - Room Booking
+  - Tenants
+  tags_raw:
+  - Library
+  - Springshare
+  - LibGuides
+  - Room Booking
   - Tenant
   properties:
   - type: Documentation
@@ -215,6 +243,12 @@ apis:
     the named account and the entitlement configuration are Khalifa's.
   humanURL: https://khalifa.idm.oclc.org/login
   tags:
+  - Library
+  - Proxy
+  - OCLC
+  - Access Management
+  - Tenants
+  tags_raw:
   - Library
   - Proxy
   - OCLC
@@ -278,6 +312,8 @@ apis:
   humanURL: https://khazna.ku.ac.ae
   baseURL: https://khazna.ku.ac.ae/ws/oai
   tags:
+  - OAI-PMH
+  tags_raw:
   - oai-pmh
   properties:
   - type: OpenAPI
