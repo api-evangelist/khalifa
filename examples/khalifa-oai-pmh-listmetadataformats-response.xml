@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  provenance:
+    generated: 2026-09-01
+    method: probed
+    source: live GET https://khazna.ku.ac.ae/ws/oai?verb=ListMetadataFormats on 2026-09-01 (HTTP 200, Content-Type application/xml)
+    notes: Captured verbatim. The OAI-PMH base URL is on Khalifa University's own registrable
+           domain (khazna.ku.ac.ae) and the adminEmail in the Identify response is khazna@ku.ac.ae.
+           The repository software behind it is an Elsevier Pure tenant
+           (khazna.ku.ac.ae CNAMEs to khalifauniversity.elsevierpure.com); the OAI-PMH
+           harvesting surface itself is operated by the institution.
+-->
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd https://www.openaire.eu/cerif-profile/1.2/ https://www.openaire.eu/schema/cris/1.2/openaire-cerif-profile.xsd">
+  <responseDate>2026-09-01T19:27:38Z</responseDate>
+  <request verb="ListMetadataFormats">https://khazna.ku.ac.ae/ws/oai</request>
+  <ListMetadataFormats>
+    <metadataFormat>
+      <metadataPrefix>mods</metadataPrefix>
+      <schema>http://www.loc.gov/mods/v3/mods-3-8.xsd</schema>
+      <metadataNamespace>http://www.loc.gov/mods/v3</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>xmetadiss</metadataPrefix>
+      <schema>http://files.dnb.de/standards/xmetadiss/xmetadiss.xsd</schema>
+      <metadataNamespace>http://www.d-nb.de/standards/xmetadissplus/</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>oai_dc</metadataPrefix>
+      <schema>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>
+      <metadataNamespace>http://www.openarchives.org/OAI/2.0/oai_dc/</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>nl_didl</metadataPrefix>
+      <schema>http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd</schema>
+      <metadataNamespace>urn:mpeg:mpeg21:2002:02-DIDL-NS</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>qdc</metadataPrefix>
+      <schema>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>
+      <metadataNamespace>http://www.openarchives.org/OAI/2.0/oai_dc/</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>mods_swepub</metadataPrefix>
+      <schema>http://www.loc.gov/mods/v3/mods-3-7.xsd</schema>
+      <metadataNamespace>http://www.loc.gov/mods/v3</metadataNamespace>
+    </metadataFormat>
+    <metadataFormat>
+      <metadataPrefix>uketd_dc</metadataPrefix>
+      <schema>http://naca.central.cranfield.ac.uk/ethos-oai/2.0/uketd_dc.xsd</schema>
+      <metadataNamespace>http://naca.central.cranfield.ac.uk/ethos-oai/2.0/</metadataNamespace>
+    </metadataFormat>
+  </ListMetadataFormats>
+</OAI-PMH>

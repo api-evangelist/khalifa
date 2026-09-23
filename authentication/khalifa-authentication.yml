@@ -1,0 +1,105 @@
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live probes 2026-09-01 of every surface attributed to Khalifa University, plus
+  openapi/khalifa-khazna-oai-pmh-openapi.yml. Each scheme records the operator of the thing it
+  protects, because most of Khalifa's authenticated surface area belongs to vendors it rents.
+provider: Khalifa University
+providerId: khalifa
+summary:
+  types:
+  - none
+  - oauth2
+  - saml
+  - apiKey
+  institution_operated_public_apis_requiring_no_auth: 2
+schemes:
+- name: KhaznaOaiPmhPublic
+  type: none
+  operator: institution
+  applies_to: https://khazna.ku.ac.ae/ws/oai
+  description: >-
+    The Khazna OAI-PMH base URL is open and anonymous, as OAI-PMH 2.0 requires. Probed
+    2026-09-01: ?verb=Identify, ?verb=ListMetadataFormats and ?verb=ListSets all returned HTTP
+    200 with no credential of any kind.
+  evidence:
+    url: https://khazna.ku.ac.ae/ws/oai?verb=Identify
+    status: 200
+- name: KuWebRestPartiallyOpen
+  type: none
+  operator: institution
+  applies_to: https://www.ku.ac.ae/wp-json
+  description: >-
+    The WordPress REST API on the university's own web host answers its discovery root
+    anonymously (HTTP 200, 17 namespaces, 202 routes, name "Khalifa University"), and a subset of
+    routes return real data without credentials — wp/v2/search and tribe/events/v1/* were both
+    HTTP 200 on 2026-09-01. The core wp/v2 collection routes are deliberately closed: they return
+    HTTP 401 with code "itsec_rest_api_access_restricted" (the iThemes/Solid Security REST
+    restriction). Write access is gated behind WordPress application passwords, authorization at
+    https://www.ku.ac.ae/wp-admin/authorize-application.php, which is not usable by the public.
+  evidence:
+    url: https://www.ku.ac.ae/wp-json/wp/v2/search?search=research&per_page=1
+    status: 200
+- name: EntraIdOidc
+  type: oauth2
+  operator: institution
+  applies_to: https://login.microsoftonline.com/ku.ac.ae/v2.0
+  description: >-
+    Khalifa University's own Microsoft Entra ID tenant (08fe1c0a-19f5-4f24-a662-fdd5dd460025) is
+    the OpenID Connect issuer for the ku.ac.ae namespace. The discovery document is public and
+    machine-readable; obtaining a token requires an institution account. This is the strongest
+    institution-operated identity surface Khalifa publishes.
+  evidence:
+    url: https://login.microsoftonline.com/ku.ac.ae/v2.0/.well-known/openid-configuration
+    status: 200
+- name: EntraIdSaml
+  type: saml
+  operator: institution
+  applies_to: https://login.microsoftonline.com/08fe1c0a-19f5-4f24-a662-fdd5dd460025/saml2
+  description: >-
+    SAML 2.0 single sign-on for institution systems, issued by the same tenant. Observed in
+    production: https://elearn.ku.ac.ae/ redirects to the tenant's /saml2 endpoint with a
+    SAMLRequest, and https://portal.ku.ac.ae/ and https://kubee.ku.ac.ae/ redirect to its
+    WS-Federation endpoint with wtrealm http://adfs.ku.ac.ae/adfs/services/trust. Federation
+    metadata is published and returns HTTP 200.
+  evidence:
+    url: https://login.microsoftonline.com/ku.ac.ae/federationmetadata/2007-06/federationmetadata.xml
+    status: 200
+- name: PureWebServiceApiKey
+  type: apiKey
+  operator: vendor
+  applies_to: https://khazna.ku.ac.ae/ws/api
+  description: >-
+    NOT KHALIFA'S SCHEME — recorded so a later run does not rediscover it and mistake it for the
+    institution's. The Elsevier Pure Web Service on the Khazna host declares
+    `security: [{api-key: []}]` in its own contract (info.title "Pure API", version 5.36.2-1,
+    info.contact.email pure-support@elsevier.com, servers "- url: /ws/api"). The contract is
+    Elsevier's product spec served under Khalifa's hostname; the versioned and swagger paths
+    (/ws/api/524/openapi.yaml, /ws/api/swagger.json) return HTTP 401. Keys are issued by the
+    institution's Pure administrators, but the auth model is the vendor's.
+  evidence:
+    url: https://khazna.ku.ac.ae/ws/api/openapi.yaml
+    status: 200
+- name: BlackboardLearnOauth2
+  type: oauth2
+  operator: vendor
+  applies_to: https://khalifauni.blackboard.com/learn/api/public/v1
+  description: >-
+    NOT KHALIFA'S SCHEME. The Blackboard Learn REST API on Khalifa's tenant is protected by
+    Anthology's three-legged OAuth 2.0 with developer keys registered in the Blackboard Developer
+    Portal. Only /learn/api/public/v1/system/version is anonymous, which is what confirmed the
+    tenant is live. Recorded as the vendor's.
+  evidence:
+    url: https://khalifauni.blackboard.com/learn/api/public/v1/system/version
+    status: 200
+- name: SpringshareLibAppsApiKey
+  type: apiKey
+  operator: vendor
+  applies_to: https://lgapi-us.libapps.com
+  description: >-
+    NOT KHALIFA'S SCHEME. LibGuides/LibAnswers/LibCal API access for the kustar Springshare
+    account is issued per site by Springshare and keyed to their platform. Recorded as the
+    vendor's; the tenancy itself is real and is recorded in apis.yml.
+  evidence:
+    url: https://library.ku.ac.ae/lib
+    status: 200

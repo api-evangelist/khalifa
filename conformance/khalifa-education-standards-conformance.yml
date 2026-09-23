@@ -1,0 +1,162 @@
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live probes of Khalifa University hosts on 2026-09-01, run as part of the API Evangelist
+  university pipeline. Every hit below points at the exact URL that returned the evidence; no
+  conformance is recorded from a prose claim, and nothing is credited from a vendor's
+  certification page.
+provider: Khalifa University
+providerId: khalifa
+regime: education
+description: >-
+  Conformance of Khalifa University's own machine-readable surfaces against the Kin Score
+  `education` regime standards (scim, lti, oneroster, ed-fi, caliper, qti, oai-pmh, shibboleth,
+  saml, orcid, datacite, crossref). Reward-only: absence below means "no public evidence found on
+  2026-09-01", not "not in use internally". Operator is recorded per standard, because most of
+  Khalifa's education-standard surface area sits inside vendor platforms it rents.
+standards:
+- id: oai-pmh
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://khazna.ku.ac.ae/ws/oai?verb=Identify
+    status: 200
+    content_type: application/xml
+    detail: >-
+      Khazna, Khalifa University's research portal, answers OAI-PMH 2.0 at
+      https://khazna.ku.ac.ae/ws/oai. Identify returns protocolVersion 2.0, baseURL
+      https://khazna.ku.ac.ae/ws/oai, adminEmail khazna@ku.ac.ae, earliestDatestamp
+      2023-01-11T09:41:56Z, granularity YYYY-MM-DDThh:mm:ssZ, deletedRecord no. The response
+      declares the OpenAIRE CERIF 1.2 profile in xsi:schemaLocation. ListMetadataFormats returns
+      7 formats including oai_dc, mods (LoC MODS 3.8) and xmetadiss; ListSets returns HTTP 200
+      with a 23,615-byte set hierarchy. The base URL is on the institution's own registrable
+      domain and the admin contact is an institution address, so the harvesting surface is
+      recorded as institution-operated even though the repository software is an Elsevier Pure
+      tenant. Captured verbatim in examples/khalifa-oai-pmh-identify-response.xml and
+      examples/khalifa-oai-pmh-listmetadataformats-response.xml.
+- id: saml
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://login.microsoftonline.com/ku.ac.ae/federationmetadata/2007-06/federationmetadata.xml
+    status: 200
+    content_type: application/xml
+    detail: >-
+      Khalifa University operates its own Microsoft Entra ID tenant for the ku.ac.ae namespace
+      (tenant id 08fe1c0a-19f5-4f24-a662-fdd5dd460025; getuserrealm.srf reports
+      NameSpaceType=Managed, DomainName=ku.ac.ae, FederationBrandName=ku.ac.ae). SAML 2.0
+      federation metadata for that tenant is published and returns HTTP 200. The tenant is
+      demonstrably in production as a SAML IdP: https://elearn.ku.ac.ae/ (Blackboard Learn)
+      redirects to
+      https://login.microsoftonline.com/08fe1c0a-19f5-4f24-a662-fdd5dd460025/saml2 with a
+      SAMLRequest, and https://portal.ku.ac.ae/ and https://kubee.ku.ac.ae/ redirect to the same
+      tenant's WS-Federation endpoint with wtrealm
+      http://adfs.ku.ac.ae/adfs/services/trust. The identity provider is the institution's; the
+      hosting platform is Microsoft's.
+- id: shibboleth
+  status: not-found
+  operator: null
+  evidence:
+    url: https://shibboleth.ku.ac.ae
+    status: 0
+    detail: >-
+      No Shibboleth IdP found. shibboleth.ku.ac.ae, sso.ku.ac.ae and idp.ku.ac.ae do not resolve
+      (idp.ku.ac.ae has a CNAME to idp.gslb.ku.ac.ae that returns no address). No Khalifa
+      University entity was located in eduGAIN. Khalifa federates through Microsoft Entra ID
+      (recorded under `saml` above) rather than a Shibboleth deployment.
+- id: orcid
+  status: not-found
+  operator: null
+  evidence:
+    url: https://khazna.ku.ac.ae/ws/oai?verb=Identify
+    status: 200
+    detail: >-
+      No institution-operated ORCID integration surface is publicly exposed. Individual Khalifa
+      researchers hold ORCID iDs, but that is a fact about people, not a machine-readable
+      surface the institution publishes, and it is not recorded as conformance.
+- id: datacite
+  status: not-found
+  operator: null
+  evidence:
+    url: https://api.datacite.org/clients?query=ku.ac.ae
+    status: 200
+    detail: >-
+      DataCite returns zero clients for "ku.ac.ae" and zero providers for "khalifa" (meta.total 0
+      on both queries, 2026-09-01). No DataCite repository or member registration was found, so
+      no membership is recorded. The Khazna repository does not appear to mint DOIs through
+      DataCite under its own client.
+- id: crossref
+  status: not-found
+  operator: null
+  evidence:
+    url: https://api.crossref.org/members?query=khalifa
+    status: 200
+    detail: >-
+      Crossref member search for "khalifa" returns only Yayasan Khalifah Alfitama (51139) and
+      Hamad bin Khalifa University Press (3277, Qatar). Neither is Khalifa University of Science
+      and Technology, Abu Dhabi. No Crossref membership recorded.
+- id: lti
+  status: not-found
+  operator: null
+  evidence:
+    url: https://khalifauni.blackboard.com/learn/api/public/v1/system/version
+    status: 200
+    detail: >-
+      Khalifa University runs a Blackboard Learn tenant at khalifauni.blackboard.com
+      (elearn.ku.ac.ae CNAMEs to it; the public version endpoint returns
+      {"learn":{"major":4000,"minor":21,"patch":0,"build":"rel.28+435d029"}}). Blackboard Learn
+      is an LTI-certified platform, but that certification is Anthology's, evidenced from the
+      vendor's product, not from any contract Khalifa University publishes. Recording it as
+      Khalifa conformance would be crediting the institution for its vendor's engineering, so it
+      is recorded as not-found.
+- id: scim
+  status: not-found
+  operator: null
+  evidence:
+    url: https://login.microsoftonline.com/ku.ac.ae/v2.0/.well-known/openid-configuration
+    status: 200
+    detail: >-
+      No public SCIM endpoint found on any ku.ac.ae host. Entra ID supports SCIM provisioning,
+      but no institution-published SCIM surface or contract is reachable without credentials.
+- id: oneroster
+  status: not-found
+  operator: null
+  evidence:
+    url: https://www.ku.ac.ae/wp-json/
+    status: 200
+    detail: No OneRoster surface found on any Khalifa University host.
+- id: ed-fi
+  status: not-found
+  operator: null
+  evidence:
+    url: https://www.ku.ac.ae/wp-json/
+    status: 200
+    detail: >-
+      No Ed-Fi surface found. Ed-Fi is a K-12 data standard and is not expected at a UAE
+      research university.
+- id: caliper
+  status: not-found
+  operator: null
+  evidence:
+    url: https://khalifauni.blackboard.com/learn/api/public/v1/system/version
+    status: 200
+    detail: >-
+      No Caliper Analytics endpoint published. Any Caliper eventing inside the Blackboard tenant
+      is not publicly reachable and would in any case be the vendor's implementation.
+- id: qti
+  status: not-found
+  operator: null
+  evidence:
+    url: https://khalifauni.blackboard.com/learn/api/public/v1/system/version
+    status: 200
+    detail: No QTI surface published on any institution or tenant host.
+summary:
+  probed: 12
+  conformant: 2
+  conformant_institution_operated: 2
+  not_found: 10
+  note: >-
+    Two of the twelve education-regime standards are met with institution-operated evidence:
+    OAI-PMH on the institution's own host, and SAML through the institution's own Entra ID
+    tenant. Both were missed by the 2026-06-03 profile, which recorded no machine-readable
+    surface at all for Khalifa University.

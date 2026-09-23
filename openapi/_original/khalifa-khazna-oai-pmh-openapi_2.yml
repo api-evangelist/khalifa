@@ -1,0 +1,133 @@
+# x-archived-from: khalifa-khazna-oai-pmh-openapi.yml
+# x-archived-on: 2026-09-16
+openapi: 3.0.3
+info:
+  title: Khalifa University Khazna OAI-PMH Repository
+  description: >-
+    Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH) 2.0 endpoint operated by
+    Khalifa University of Science and Technology at https://khazna.ku.ac.ae/ws/oai. This is the
+    institution's research-output harvesting surface: the base URL sits on Khalifa University's own
+    registrable domain (ku.ac.ae) and the repository's adminEmail is khazna@ku.ac.ae.
+
+    OPERATOR NOTE: the repository software behind Khazna is an Elsevier Pure tenant —
+    khazna.ku.ac.ae is a CNAME to khalifauniversity.elsevierpure.com, which is a CNAME to
+    eu.prod.elsevierpure.com. Elsevier's own "Pure API" contract is served from the same host at
+    /ws/api/openapi.yaml (info.title "Pure API", info.contact.email pure-support@elsevier.com,
+    servers "- url: /ws/api", version 5.36.2-1) and is DELIBERATELY NOT catalogued under Khalifa
+    University: it is Elsevier's contract, not the institution's. What is recorded here is the
+    open, anonymous OAI-PMH harvesting surface — an open standard, deployed on the institution's
+    own host, answering for the institution's own research corpus.
+
+    This document is DERIVED. The verbs, parameters and error codes are those defined by the
+    OAI-PMH 2.0 specification; the base URL, supported metadata prefixes and granularity are taken
+    from live Identify and ListMetadataFormats responses probed on 2026-09-01. No operation below
+    was invented.
+  version: '2.0'
+  contact:
+    name: Khalifa University Khazna repository
+    email: khazna@ku.ac.ae
+    url: https://khazna.ku.ac.ae
+  license:
+    name: Not stated by the repository
+x-operator: institution
+x-software: Elsevier Pure (tenant khalifauniversity.elsevierpure.com)
+x-provenance:
+  generated: '2026-09-01'
+  method: derived
+  source: >-
+    Derived from the OAI-PMH 2.0 specification (https://www.openarchives.org/OAI/openarchivesprotocol.html)
+    bound to the live base URL https://khazna.ku.ac.ae/ws/oai. Live probes 2026-09-01:
+    ?verb=Identify HTTP 200 application/xml; ?verb=ListMetadataFormats HTTP 200 (7 metadata
+    formats); ?verb=ListSets HTTP 200 (23,615 bytes). Captured responses are in
+    examples/khalifa-oai-pmh-identify-response.xml and
+    examples/khalifa-oai-pmh-listmetadataformats-response.xml.
+servers:
+  - url: https://khazna.ku.ac.ae/ws/oai
+    description: Khazna OAI-PMH base URL (probed 2026-09-01, HTTP 200)
+tags:
+  - name: oai-pmh
+    description: OAI-PMH 2.0 verbs supported by the Khazna repository.
+paths:
+  /:
+    get:
+      tags:
+        - oai-pmh
+      summary: OAI-PMH request
+      description: >-
+        Single OAI-PMH 2.0 entry point. The `verb` parameter selects the operation. Responses are
+        XML in the http://www.openarchives.org/OAI/2.0/ namespace; the repository additionally
+        declares the OpenAIRE CERIF 1.2 profile
+        (https://www.openaire.eu/cerif-profile/1.2/) in its schemaLocation.
+      operationId: oaiRequest
+      parameters:
+        - name: verb
+          in: query
+          required: true
+          description: The OAI-PMH verb to invoke.
+          schema:
+            type: string
+            enum:
+              - Identify
+              - ListMetadataFormats
+              - ListSets
+              - ListIdentifiers
+              - ListRecords
+              - GetRecord
+        - name: metadataPrefix
+          in: query
+          required: false
+          description: >-
+            Metadata format to return. Formats confirmed live on 2026-09-01 by ListMetadataFormats.
+          schema:
+            type: string
+            enum:
+              - oai_dc
+              - mods
+              - xmetadiss
+        - name: identifier
+          in: query
+          required: false
+          description: Record identifier; required for GetRecord.
+          schema:
+            type: string
+        - name: set
+          in: query
+          required: false
+          description: Set spec to restrict a selective harvest. Sets are listed by ListSets.
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: false
+          description: >-
+            Lower bound of the datestamp range. Repository granularity is
+            YYYY-MM-DDThh:mm:ssZ; earliestDatestamp is 2023-01-11T09:41:56Z.
+          schema:
+            type: string
+            format: date-time
+        - name: until
+          in: query
+          required: false
+          description: Upper bound of the datestamp range, same granularity.
+          schema:
+            type: string
+            format: date-time
+        - name: resumptionToken
+          in: query
+          required: false
+          description: Flow-control token returned by a previous incomplete list response.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >-
+            An OAI-PMH response document. Protocol-level failures (badVerb, badArgument,
+            cannotDisseminateFormat, idDoesNotExist, noRecordsMatch, noSetHierarchy,
+            noMetadataFormats, badResumptionToken) are also returned with HTTP 200 inside an
+            <error> element, as the OAI-PMH specification requires.
+          content:
+            application/xml:
+              schema:
+                type: string
+                description: OAI-PMH 2.0 XML response document.
+components: {}
