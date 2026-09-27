@@ -99,36 +99,20 @@ apis:
   - type: Documentation
     url: >-
       https://login.microsoftonline.com/ku.ac.ae/federationmetadata/2007-06/federationmetadata.xml
-- aid: khalifa:ku-web-rest
-  name: Khalifa University Website REST API (WordPress)
-  x-operator: institution
-  description: >-
-    The university's own web host at www.ku.ac.ae runs WordPress and answers its REST discovery root anonymously
-    — HTTP 200, name "Khalifa University", 17 namespaces, 202 routes (probed 2026-09-01). Access is partial
-    by design: the core wp/v2 collection routes return HTTP 401 with code "itsec_rest_api_access_restricted",
-    while wp/v2/search and the tribe/events/v1 event and venue routes return real data with no credential.
-    The deployment is institution-operated; the contract is WordPress core's and its plugins', so no generic
-    WordPress specification is catalogued under Khalifa University. Recorded as a real, live, partially
-    readable institution surface — not as Khalifa engineering.
-  humanURL: https://www.ku.ac.ae/wp-json/
+- aid: khalifa:ku-ac-ae-website-wordpress-rest
+  name: Khalifa University Website (WordPress REST)
+  description: 'The public WordPress REST API (wp-json) of the Khalifa University website at www.ku.ac.ae:
+    the route index of the site''s content management system, catalogued as one site surface rather than
+    as separate APIs.'
   baseURL: https://www.ku.ac.ae/wp-json
   tags:
-  - Content
-  - Websites
   - WordPress
-  - Event
-  - Search
-  tags_raw:
-  - Content
-  - Website
-  - WordPress
-  - Events
-  - Search
+  x-surface: platform-generated
   properties:
-  - type: Authentication
-    url: authentication/khalifa-authentication.yml
   - type: Documentation
-    url: https://www.ku.ac.ae/wp-json/
+    url: https://www.ku.ac.ae/wp-json
+  x-platform: wordpress
+  x-platform-surface: rest
 - aid: khalifa:khazna-pure
   name: Khazna Research Portal (Elsevier Pure tenant)
   x-operator: tenant
@@ -295,12 +279,13 @@ apis:
   - Robotics
   - Research
   - Source Code
-  - Open-Source
+  - Open Source
   tags_raw:
   - Robotics
   - Research
   - Source Code
   - Open Source
+  - Open-Source
   properties:
   - type: Documentation
     url: https://github.com/kucars
