@@ -9,11 +9,11 @@
       "method": "discovered"
     },
     {
-      "source": "https://www.ku.ac.ae",
+      "source": "https://www.ku.ac.ae/feed/",
       "feed_url": "https://www.ku.ac.ae/feed/",
       "title": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "feed"
     },
     {
       "source": "https://www.ku.ac.ae/news/feed/",
@@ -28,15 +28,8 @@
       "title": "",
       "saved": 0,
       "method": "feed"
-    },
-    {
-      "source": "https://www.ku.ac.ae/feed/",
-      "feed_url": "https://www.ku.ac.ae/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
     }
   ],
-  "post_count": 25,
-  "fetched": "2026-10-03T12:30:02Z"
+  "post_count": 31,
+  "fetched": "2026-10-10T13:15:00Z"
 }
