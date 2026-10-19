@@ -1,7 +1,11 @@
 openapi: 3.2.0
 info:
   title: Khalifa University Khazna Repository Oai Pmh API
-  description: Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH) 2.0 endpoint operated by Khalifa University of Science and Technology at https://khazna.ku.ac.ae/ws/oai.
+  description: 'Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH) 2.0 endpoint operated by Khalifa University of Science and Technology at https://khazna.ku.ac.ae/ws/oai. This is the institution''s research-output harvesting surface: the base URL sits on Khalifa University''s own registrable domain (ku.ac.ae) and the repository''s adminEmail is khazna@ku.ac.ae.
+
+    OPERATOR NOTE: the repository software behind Khazna is an Elsevier Pure tenant — khazna.ku.ac.ae is a CNAME to khalifauniversity.elsevierpure.com, which is a CNAME to eu.prod.elsevierpure.com. Elsevier''s own "Pure API" contract is served from the same host at /ws/api/openapi.yaml (info.title "Pure API", info.contact.email pure-support@elsevier.com, servers "- url: /ws/api", version 5.36.2-1) and is DELIBERATELY NOT catalogued under Khalifa University: it is Elsevier''s contract, not the institution''s. What is recorded here is the open, anonymous OAI-PMH harvesting surface — an open standard, deployed on the institution''s own host, answering for the institution''s own research corpus.
+
+    This document is DERIVED. The verbs, parameters and error codes are those defined by the OAI-PMH 2.0 specification; the base URL, supported metadata prefixes and granularity are taken from live Identify and ListMetadataFormats responses probed on 2026-09-01. No operation below was invented.'
   version: '2.0'
   contact:
     name: Khalifa University Khazna repository
