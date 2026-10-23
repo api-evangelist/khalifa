@@ -3,33 +3,21 @@
   "feeds": [
     {
       "source": "https://www.ku.ac.ae/news",
-      "feed_url": "https://www.ku.ac.ae/news/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "discovered"
+      "error": "TimeoutError"
     },
     {
       "source": "https://www.ku.ac.ae/feed/",
-      "feed_url": "https://www.ku.ac.ae/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
+      "error": "TimeoutError"
     },
     {
       "source": "https://www.ku.ac.ae/news/feed/",
-      "feed_url": "https://www.ku.ac.ae/news/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
+      "error": "TimeoutError"
     },
     {
       "source": "https://www.ku.ac.ae/category/news/feed/",
-      "feed_url": "https://www.ku.ac.ae/category/news/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
+      "error": "TimeoutError"
     }
   ],
-  "post_count": 31,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 34,
+  "fetched": "2026-10-17T14:53:57Z"
 }
