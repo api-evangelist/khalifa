@@ -1,4 +1,4 @@
-# Khalifa University (khalifa)
+# Khalifa University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,47 +64,128 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Khalifa University of Science and Technology is a research-intensive university in Abu Dhabi, United Arab Emirates, ranked #202 in the QS World University Rankings 2025. This repository catalogs its public developer and API footprint as an [APIs.json](https://apisjson.org) provider profile. No central public, documented API program was found; the only confirmed public code footprint is the GitHub organization of its Center for Autonomous Robotic Systems (KUCARS).
+Khalifa University of Science and Technology is a research-intensive public university in Abu Dhabi, United Arab Emirates (ROR 05hffr360), formed from the 2017 merger of KUSTAR, the Masdar Institute and the Petroleum Institute. Its programmable footprint is small, real, and almost entirely indirect. Two surfaces are genuinely institution-operated: an OAI-PMH 2.0 endpoint for the Khazna research portal at khazna.ku.ac.ae/ws/oai, live and anonymous with an institution admin contact, and the university's own Microsoft Entra ID tenant for the ku.ac.ae namespace, which issues OpenID Connect and SAML 2.0 for institution systems. A third, partial surface is the WordPress REST API on www.ku.ac.ae, whose discovery root and a handful of routes answer publicly while the core collections are closed with HTTP 401. Everything else a search turns up is a vendor contract running under the university's name: Khazna itself is an Elsevier Pure tenant (khazna.ku.ac.ae CNAMEs to khalifauniversity.elsevierpure.com) and Elsevier's own Pure API spec is served from that host; the LMS is a Blackboard Learn tenant behind elearn.ku.ac.ae; discovery is Ex Libris Primo VE; the library web presence, calendar and ask-a-librarian service are Springshare; off-campus access is OCLC EZproxy. Those relationships are recorded here as tenancies. None of their contracts are catalogued as Khalifa's. There is no central developer portal, no published API program, no open-data portal, and no institution-operated API reference.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/khalifa/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=khalifa-api-evangelist&utm_content=repo
+**Areas:** University · Higher Education · Education · Research · Research Data · Research Repository · Identity Federation · OAI-PMH · Robotics · United Arab Emirates · Abu Dhabi
 
-## Type
+## Khalifa University on APIs.io
 
-- Index
-- Consumer
-- 3rd-Party
+Everything profiled for Khalifa University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/khalifa/](https://apis.io/providers/khalifa/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (10)
 
-Education, Higher Education, University, Research, Robotics, United Arab Emirates, Abu Dhabi
+- [Khalifa University Identity Federation (Microsoft Entra ID)](https://apis.io/apis/khalifa/entra-identity-federation/) — Khalifa University operates its own Microsoft Entra ID tenant for the ku.ac.ae namespace — tenant id 08fe1c0a-19f5-4f24-a662-fdd5dd460025, getuserrealm.srf…
+- [Khalifa University Website (WordPress REST)](https://apis.io/apis/khalifa/ku-ac-ae-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the Khalifa University website at www.ku.ac.ae: the route index of the site's content management system,…
+- [Khazna Research Portal (Elsevier Pure tenant)](https://apis.io/apis/khalifa/khazna-pure/) — Khalifa University's CRIS and research portal, Khazna, is an Elsevier Pure tenancy: khazna.ku.ac.ae is a CNAME to khalifauniversity.elsevierpure.com, which…
+- [Blackboard Learn (khalifauni tenant)](https://apis.io/apis/khalifa/blackboard-learn/) — Khalifa University's learning management system is an Anthology Blackboard Learn SaaS tenancy named "khalifauni". elearn.ku.ac.ae is a CNAME to…
+- [Library Discovery (Ex Libris Primo VE tenant)](https://apis.io/apis/khalifa/primo-discovery/) — Library discovery runs on an Ex Libris Primo VE tenancy at khalifa.primo.exlibrisgroup.com with view id 971KUOSTAR_INST:KU — the institution code still…
+- [Library Web, Calendar and Reference (Springshare tenant)](https://apis.io/apis/khalifa/springshare/) — Three Springshare tenancies serve the Khalifa University library. library.ku.ac.ae is a CNAME to region-us.libguides.com (LibGuides; page title "Library…
+- [Off-Campus Access (OCLC EZproxy tenant)](https://apis.io/apis/khalifa/ezproxy/) — Off-campus access to licensed library resources runs on an OCLC EZproxy tenancy under the named account khalifa.idm.oclc.org (HTTP 200 on /login, probed…
+- [ROR Registration](https://apis.io/apis/khalifa/ror/) — Khalifa University of Science and Technology is registered in the Research Organization Registry as https://ror.org/05hffr360, with the alternate names…
+- [KUCARS Open-Source Robotics Research (GitHub)](https://apis.io/apis/khalifa/kucars/) — Public open-source repositories from the Khalifa University Center for Autonomous Robotic Systems (KUCARS) — 71 public repos covering coverage path…
+- [Khalifa University Oai Pmh API](https://apis.io/apis/khalifa/khalifa-oai-pmh-api/) — OAI-PMH 2.0 verbs supported by the Khazna repository.
 
-## APIs
+### Published properties
 
-- **KUCARS Open-Source Robotics Research (GitHub)** — Public open-source robotics research repositories (coverage path planning, soft manipulator dynamics, collision detection, haptic teleoperation) from the Khalifa University Center for Autonomous Robotic Systems. Source code, not a managed API. Docs: https://github.com/kucars
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Plans, Rate Limits & FinOps
+#### JSON-LD (1)
 
-- Plans: [plans/khalifa-plans-pricing.yml](plans/khalifa-plans-pricing.yml)
-- Rate Limits: [rate-limits/khalifa-rate-limits.yml](rate-limits/khalifa-rate-limits.yml)
-- FinOps: [finops/khalifa-finops.yml](finops/khalifa-finops.yml)
+Linked-data contexts for the provider's vocabulary.
 
-## Timestamps
+- [Khalifa Context](https://apis.io/jsonld/khalifa/khalifa-context/)
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+#### Examples (1)
 
-## Common Properties
+Example requests and responses.
 
-- Website: https://www.ku.ac.ae
-- Library: https://library.ku.ac.ae
-- GitHub: https://github.com/kucars
-- LinkedIn: https://www.linkedin.com/school/khalifauniversity/
+- [Khalifa Entra Openid Configuration](https://apis.io/examples/khalifa/khalifa-entra-openid-configuration/)
 
-## Notes
+#### Security (2)
 
-Verification caveats: No public developer portal or documented API was discovered for Khalifa University. Student/administrative systems (KU Connect, Banner registration, e-Learn, library discovery) are gated behind institutional authentication. The KUCARS GitHub org publishes open-source research code, not a managed, documented API. The LinkedIn page returns HTTP 999 (anti-bot) but exists publicly; the admissions portal did not resolve from the test environment. No endpoints were fabricated.
+Authentication, trust centre, and vulnerability disclosure.
 
-## Maintainers
+- [Khalifa Authentication](https://apis.io/security/khalifa/khalifa-authentication/)
+- [Khalifa Domain Security](https://apis.io/security/khalifa/khalifa-domain-security/)
 
-- Kin Lane — kin@apievangelist.com
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Khalifa Plans Pricing](https://apis.io/plans/khalifa/khalifa-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Khalifa Rate Limits](https://apis.io/rate-limits/khalifa/khalifa-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Khalifa Finops](https://apis.io/finops/khalifa/khalifa-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.ku.ac.ae)
+- [Support](https://www.ku.ac.ae/contact-us)
+- [Blog](https://www.ku.ac.ae/news)
+- [Terms of service](https://www.ku.ac.ae/disclaimer)
+- [Privacy policy](https://www.ku.ac.ae/privacy-policy)
+- [GitHub](https://github.com/kucars)
+
+## API Evangelist rating
+
+**Kin Score 25.0** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 22.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 26.3 |
+
+**Agent readiness 20.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.5** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/khalifa/](https://apis.io/providers/khalifa/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Khalifa University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/khalifa/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
